@@ -55,7 +55,7 @@ export async function POST(req: Request) {
   // Get the ID and type
   const { id } = evt.data;
   const eventType = evt.type;
-
+  console.log("EVENT_TYPE", eventType)
   // CREATE
   if (eventType === "user.created") {
     const { id, email_addresses, image_url, first_name, last_name, username } = evt.data;
@@ -68,7 +68,7 @@ export async function POST(req: Request) {
       lastName: last_name,
       photo: image_url,
     };
-
+    console.log("USER", user)
     const newUser = await createUser(user);
 
     // Set public metadata
@@ -79,7 +79,7 @@ export async function POST(req: Request) {
         },
       });
     }
-
+    console.log("NEW_USER", newUser)
     return NextResponse.json({ message: "OK", user: newUser });
   }
 
